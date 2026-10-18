@@ -1,0 +1,18 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Transcription output",
+  "properties": {
+    "results": {
+      "type": "string",
+      "template": "{{links.apiDefaultDatasetUrl}}/items",
+      "title": "Transcripts",
+      "description": "One item per file: language, duration, full text, timestamped segments and links to SRT/VTT/TXT files."
+    },
+    "files": {
+      "type": "string",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/keys",
+      "title": "Subtitle files",
+      "description": "SRT, VTT, TXT and JSON files saved in the run's key-value store."
+    }
+  }
+}

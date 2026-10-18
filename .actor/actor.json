@@ -1,0 +1,37 @@
+{
+  "actorSpecification": 1,
+  "name": "audio-video-transcriber",
+  "title": "Audio & Video Transcriber: Speech to Text & SRT Subtitles",
+  "description": "Transcribe audio and video files to text with Whisper: MP3, MP4, WAV, M4A, WebM, OGG and more. 99 languages with auto-detect, timestamps, SRT/VTT subtitles, word timings and translation to English. No API key. Pay per audio minute.",
+  "version": "1.0",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Transcripts",
+          "transformation": {"fields": ["url", "language", "durationSeconds", "billedMinutes", "wordCount", "text", "srtUrl", "vttUrl", "error"]},
+          "display": {
+            "component": "table",
+            "properties": {
+              "url": {"label": "File", "format": "link"},
+              "language": {"label": "Language"},
+              "durationSeconds": {"label": "Duration (s)", "format": "number"},
+              "billedMinutes": {"label": "Billed minutes", "format": "number"},
+              "wordCount": {"label": "Words", "format": "number"},
+              "text": {"label": "Transcript"},
+              "srtUrl": {"label": "SRT", "format": "link"},
+              "vttUrl": {"label": "VTT", "format": "link"},
+              "error": {"label": "Error"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

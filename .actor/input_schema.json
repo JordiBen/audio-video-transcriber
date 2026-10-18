@@ -1,0 +1,185 @@
+{
+  "title": "Audio & video transcriber input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "fileUrls": {
+      "title": "Audio / video file links",
+      "type": "array",
+      "editor": "requestListSources",
+      "description": "Direct links to audio or video files (MP3, MP4, WAV, M4A, AAC, FLAC, OGG, OPUS, WebM, MOV, MKV). Google Drive (shared as 'Anyone with the link') and Dropbox share links are converted automatically. Max 1 GB per file. Platform pages such as YouTube or TikTok are not supported.",
+      "prefill": [
+        {
+          "url": "https://www.archive.org/download/count_monte_cristo_0711_librivox/count_of_monte_cristo_001_dumas.mp3"
+        }
+      ]
+    },
+    "uploadedFile": {
+      "title": "Or upload a file",
+      "type": "string",
+      "editor": "fileupload",
+      "description": "Upload one audio or video file from your computer instead of (or in addition to) links."
+    },
+    "quality": {
+      "title": "Quality",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "fast",
+        "accurate"
+      ],
+      "enumTitles": [
+        "Fast (Whisper base, $0.005/min)",
+        "Accurate (Whisper small, beam search, $0.010/min)"
+      ],
+      "default": "fast",
+      "description": "Fast is good for clear speech in English and major languages. Accurate is better for accents, noisy audio, names and non-English languages."
+    },
+    "language": {
+      "title": "Spoken language",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "auto",
+        "en",
+        "he",
+        "ar",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt",
+        "ru",
+        "uk",
+        "pl",
+        "nl",
+        "tr",
+        "hi",
+        "ja",
+        "ko",
+        "zh",
+        "id",
+        "vi",
+        "th",
+        "fa",
+        "ro",
+        "cs",
+        "sv",
+        "el",
+        "hu",
+        "da",
+        "fi",
+        "no"
+      ],
+      "enumTitles": [
+        "Auto-detect",
+        "English",
+        "Hebrew",
+        "Arabic",
+        "Spanish",
+        "French",
+        "German",
+        "Italian",
+        "Portuguese",
+        "Russian",
+        "Ukrainian",
+        "Polish",
+        "Dutch",
+        "Turkish",
+        "Hindi",
+        "Japanese",
+        "Korean",
+        "Chinese",
+        "Indonesian",
+        "Vietnamese",
+        "Thai",
+        "Persian",
+        "Romanian",
+        "Czech",
+        "Swedish",
+        "Greek",
+        "Hungarian",
+        "Danish",
+        "Finnish",
+        "Norwegian"
+      ],
+      "default": "auto",
+      "description": "Leave on auto-detect, or pick the language for better accuracy. Whisper supports 99 languages; use the API to pass any ISO 639-1 code."
+    },
+    "task": {
+      "title": "Task",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "transcribe",
+        "translate"
+      ],
+      "enumTitles": [
+        "Transcribe (same language)",
+        "Translate to English"
+      ],
+      "default": "transcribe",
+      "description": "Transcribe keeps the spoken language. Translate outputs English text from any language."
+    },
+    "outputFormats": {
+      "title": "Files to create",
+      "type": "array",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "srt",
+          "vtt",
+          "txt",
+          "json"
+        ],
+        "enumTitles": [
+          "SRT subtitles",
+          "WebVTT subtitles",
+          "Plain text",
+          "JSON segments"
+        ]
+      },
+      "default": [
+        "srt",
+        "vtt",
+        "txt"
+      ],
+      "description": "Saved to the run's key-value store; links are included in each result."
+    },
+    "wordTimestamps": {
+      "title": "Word-level timestamps",
+      "type": "boolean",
+      "default": false,
+      "description": "Add start/end time and confidence for every word (for karaoke captions, editing, search)."
+    },
+    "skipSilence": {
+      "title": "Skip silence (VAD)",
+      "type": "boolean",
+      "default": true,
+      "description": "Detect speech first and skip long silences and music. Reduces hallucinated text. Billing is by file duration either way."
+    },
+    "includeSegments": {
+      "title": "Include timestamped segments in results",
+      "type": "boolean",
+      "default": true,
+      "description": "Add start/end timestamps for each sentence-like segment to every result."
+    },
+    "vocabularyHint": {
+      "title": "Vocabulary hint",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Optional: names, brands or jargon that appear in the audio (e.g. 'Apify, Kubernetes, Dr. Cohen'). Helps spelling."
+    },
+    "maxMinutesPerFile": {
+      "title": "Max minutes per file",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 240,
+      "default": 180,
+      "unit": "minutes",
+      "description": "Longer files are transcribed up to this limit (and billed only up to it)."
+    }
+  },
+  "required": []
+}
